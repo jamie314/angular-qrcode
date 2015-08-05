@@ -1,7 +1,9 @@
 /*
- * angular-qrcode v6.0.3
+ * angular-qrcode v6.0.4
  * (c) 2013 Monospaced http://monospaced.com
  * License: MIT
+ *
+ * Modified 05/08/2015 by Jamie Toolin to support types 11-40 and automatically growing the QR code based on the input data size.
  */
 
 angular.module('monospaced.qrcode', [])
@@ -49,7 +51,7 @@ angular.module('monospaced.qrcode', [])
             qr,
             $img,
             setVersion = function(value) {
-              version = Math.max(1, Math.min(parseInt(value, 10), 10)) || 4;
+              version = Math.max(1, Math.min(parseInt(value, 10), 40)) || 4;
             },
             setErrorCorrectionLevel = function(value) {
               errorCorrectionLevel = value in levels ? value : 'M';
@@ -66,8 +68,14 @@ angular.module('monospaced.qrcode', [])
               try {
                 qr.make();
               } catch(e) {
-                error = e.message;
-                return;
+                  if (version < 40) {
+                      setVersion(version + 1);
+                      setData(data);
+                      render();
+                  } else {
+                      error = e.message;
+                      return;
+                  }
               }
 
               error = false;
