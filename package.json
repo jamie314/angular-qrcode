@@ -30,6 +30,6 @@
   ],
   "dependencies": {
     "angular": ">=1.0.6",
-    "qrcode-generator": "git://github.com/kazuhikoarase/qrcode-generator.git#ae2904f533e823e101aba2c706a3836e5af0ddca"
+    "qrcode-generator": "jamie314/qrcode-generator#4d4d4e0deab4c324e327ee4ad5980fda23ea2dde"
   }
 }
